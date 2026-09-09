@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(220, 12%, 11%);      /* #191b1f graphite */
+  --foreground: hsl(210, 14%, 94%);      /* #edeff2 */
+  --primary: hsl(74, 92%, 54%);          /* #cbf01c hi-vis chartreuse */
+  --primary-foreground: hsl(220, 14%, 9%);
+  --muted-foreground: hsl(214, 8%, 56%);
+  --border: hsl(220, 10%, 21%);
+  --card: hsl(220, 11%, 14%);
+  --card-elevated: hsl(220, 10%, 18%);
+  --steel: hsl(200, 12%, 62%);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+  }
+
+  h1, .font-h1 {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(44px, 6.4vw, 96px);
+    letter-spacing: 0.005em;
+    line-height: 0.94;
+  }
+
+  h2, .font-h2 {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+  }
+
+  h3, .font-h3 {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 600;
+    font-size: clamp(19px, 2vw, 24px);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    color: var(--primary);
+  }
+
+  .price-num, .gear-ratio, .turnaround-num {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 800;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Mechanical chain divider continuous movement */
+@keyframes chainMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 80px 0;
+  }
+}
+
+.chain-bg-anim {
+  animation: chainMove 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chain-bg-anim {
+    animation: none;
+  }
+}
+
+/* Custom technical scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(220, 12%, 11%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(220, 10%, 25%);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Subtle grit/mesh texture overlay */
+.bg-mesh-pattern {
+  background-image: radial-gradient(rgba(203, 240, 28, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
