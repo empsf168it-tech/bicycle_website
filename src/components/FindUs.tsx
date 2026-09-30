@@ -25,7 +25,7 @@ export const FindUs: React.FC = () => {
             
             {/* Address & Contact Block */}
             <div className="bg-[var(--card-elevated)] border border-[var(--border)] p-6 sm:p-8">
-              <div className="flex items-start gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 bg-[var(--primary)]/10 border border-[var(--primary)] flex items-center justify-center shrink-0">
                   <MapPin className="w-6 h-6 text-[var(--primary)]" />
                 </div>
@@ -42,25 +42,28 @@ export const FindUs: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[var(--border)]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 pt-4 border-t border-[var(--border)]">
                 <a
                   href="tel:01615550173"
-                  className="flex items-center gap-3 p-3 bg-[var(--background)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors group"
+                  className="flex items-center gap-3 p-3 bg-[var(--background)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors group min-w-0"
                 >
-                  <Phone className="w-4 h-4 text-[var(--primary)]" />
-                  <div>
+                  <Phone className="w-4 h-4 text-[var(--primary)] shrink-0" />
+                  <div className="min-w-0 flex-1">
                     <span className="text-[10px] font-mono text-[var(--muted-foreground)] block">DIRECT LINE</span>
-                    <span className="font-mono text-sm text-white font-bold group-hover:text-[var(--primary)]">0161 555 0173</span>
+                    <span className="font-mono text-xs sm:text-sm text-white font-bold group-hover:text-[var(--primary)] truncate block">0161 555 0173</span>
                   </div>
                 </a>
 
-                <div className="flex items-center gap-3 p-3 bg-[var(--background)] border border-[var(--border)]">
-                  <Mail className="w-4 h-4 text-[var(--primary)]" />
-                  <div>
+                <a
+                  href={`mailto:${SHOP_LOCATION.email}`}
+                  className="flex items-center gap-3 p-3 bg-[var(--background)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors group min-w-0"
+                >
+                  <Mail className="w-4 h-4 text-[var(--primary)] shrink-0" />
+                  <div className="min-w-0 flex-1">
                     <span className="text-[10px] font-mono text-[var(--muted-foreground)] block">WORKSHOP ENQUIRIES</span>
-                    <span className="font-mono text-sm text-white font-bold">{SHOP_LOCATION.email}</span>
+                    <span className="font-mono text-xs sm:text-sm text-white font-bold group-hover:text-[var(--primary)] truncate block">{SHOP_LOCATION.email}</span>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
 
@@ -122,53 +125,33 @@ export const FindUs: React.FC = () => {
 
           </div>
 
-          {/* Right 5 Columns: Stylized Mechanical Map & Directions Card */}
-          <div className="lg:col-span-5 bg-[var(--card-elevated)] border border-[var(--border)] p-6 flex flex-col justify-between relative overflow-hidden">
+          {/* Right 5 Columns: Professional Map & Directions Card */}
+          <div className="lg:col-span-5 bg-[var(--card-elevated)] border border-[var(--border)] p-6 sm:p-8 flex flex-col justify-between h-full space-y-6">
             
-            {/* Map Visual Graphic */}
-            <div className="relative w-full h-72 bg-black border border-[var(--border)] overflow-hidden flex items-center justify-center">
-              {/* Grid Background */}
-              <div 
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: 'radial-gradient(#cbf01c 1px, transparent 1px)',
-                  backgroundSize: '20px 20px'
-                }}
-              />
+            {/* Map Container */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-xs uppercase tracking-wider text-[var(--primary)] flex items-center gap-1.5">
+                  <Navigation className="w-3.5 h-3.5" /> WORKSHOP LOCATION
+                </span>
+                <span className="bg-black/60 px-2 py-0.5 border border-[var(--border)] text-[10px] font-mono text-[var(--steel)]">
+                  GEO: 53.4839° N, 2.2536° W
+                </span>
+              </div>
 
-              {/* Stylized Street Lines */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" fill="none">
-                {/* River Irwell curve */}
-                <path d="M 20 280 Q 150 180 380 120" stroke="#323b46" strokeWidth="18" strokeLinecap="round" />
-                <path d="M 20 280 Q 150 180 380 120" stroke="#1f2730" strokeWidth="12" strokeLinecap="round" />
-                <text x="70" y="245" fill="#4d5b6a" fontSize="10" fontFamily="monospace" transform="rotate(-25 70 245)">River Irwell</text>
-
-                {/* Chapel Street Main Road */}
-                <path d="M 40 80 L 360 210" stroke="#505a66" strokeWidth="10" strokeLinecap="square" />
-                <path d="M 40 80 L 360 210" stroke="#cbf01c" strokeWidth="2" strokeDasharray="6 6" />
-                <text x="180" y="130" fill="#a0abb8" fontSize="11" fontFamily="monospace" fontWeight="bold" transform="rotate(22 180 130)">CHAPEL STREET (A6)</text>
-
-                {/* Cross street */}
-                <path d="M 120 20 L 260 280" stroke="#3a434d" strokeWidth="6" />
-                <text x="130" y="50" fill="#6d7a88" fontSize="9" fontFamily="monospace">Blackfriars Rd</text>
-
-                {/* Workshop Pin Indicator */}
-                <g transform="translate(200, 145)">
-                  <circle cx="0" cy="0" r="16" fill="#cbf01c" fillOpacity="0.2" className="animate-ping" />
-                  <circle cx="0" cy="0" r="10" fill="#191b1f" stroke="#cbf01c" strokeWidth="3" />
-                  <circle cx="0" cy="0" r="3" fill="#cbf01c" />
-                  <rect x="16" y="-12" width="110" height="24" fill="#191b1f" stroke="#cbf01c" strokeWidth="1" />
-                  <text x="22" y="4" fill="#cbf01c" fontSize="9" fontFamily="monospace" fontWeight="bold">VELO & TORQUE M3</text>
-                </g>
-              </svg>
-
-              <div className="absolute top-3 left-3 bg-black/80 px-2 py-1 border border-[var(--border)] text-[9px] font-mono text-[var(--steel)]">
-                GEO: 53.4839° N, 2.2536° W
+              <div className="relative w-full h-72 sm:h-80 bg-black border border-[var(--border)] overflow-hidden">
+                <iframe
+                  src="https://maps.google.com/maps?q=44%20Chapel%20Street,%20Salford,%20Manchester%20M3%205DF&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  className="w-full h-full border-0 filter invert contrast-125 opacity-90 hover:opacity-100 transition-all duration-200"
+                  title="Workshop Location Map"
+                  loading="lazy"
+                  allowFullScreen
+                />
               </div>
             </div>
 
             {/* Directions Links */}
-            <div className="mt-6 space-y-3">
+            <div className="space-y-3 pt-2">
               <a
                 href="https://maps.google.com/?q=44+Chapel+Street,+Salford,+Manchester+M3+5DF"
                 target="_blank"

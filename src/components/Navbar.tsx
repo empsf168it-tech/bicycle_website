@@ -9,11 +9,40 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [activeSection, setActiveSection] = useState('home');
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      const sectionMap = [
+        { id: 'find-us', navId: '#find-us' },
+        { id: 'fitting', navId: '#fitting' },
+        { id: 'second-hand', navId: '#second-hand' },
+        { id: 'bikes', navId: '#bikes' },
+        { id: 'repairs', navId: '#repairs' },
+        { id: 'services', navId: '#workshop-status' },
+        { id: 'workshop-status', navId: '#workshop-status' },
+        { id: 'home', navId: '#home' },
+      ];
+
+      const scrollPosition = window.scrollY + 140;
+
+      for (const section of sectionMap) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(section.navId);
+            return;
+          }
+        }
+      }
+      setActiveSection('#home');
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -29,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full h-[72px] z-40 transition-all duration-200 bg-[var(--background)]/90 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 lg:px-12 ${
+      className={`fixed top-0 left-0 w-full h-[72px] z-40 transition-all duration-200 bg-[var(--background)]/90 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 xl:px-12 ${
         scrolled
           ? 'border-b-2 border-[var(--primary)] shadow-lg shadow-black/40'
           : 'border-b border-[var(--border)]'
@@ -55,20 +84,27 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
         </div>
       </a>
 
-      {/* Nav Links Centre (Desktop - Single Line) */}
-      <div className="hidden lg:flex items-center gap-6 xl:gap-8 shrink-0">
-        {navLinks.map((link) => (
-          <a
-            key={link.name}
-            href={link.href}
-            className="text-sm uppercase tracking-wider font-medium text-[var(--foreground)]/80 hover:text-[var(--primary)] transition-colors py-1 whitespace-nowrap relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[var(--primary)] hover:after:w-full after:transition-all"
-          >
-            {link.name}
-          </a>
-        ))}
+      {/* Nav Links Centre (Desktop - Single Line with Active State) */}
+      <div className="hidden xl:flex items-center gap-6 2xl:gap-8 shrink-0">
+        {navLinks.map((link) => {
+          const isActive = activeSection === link.href;
+          return (
+            <a
+              key={link.name}
+              href={link.href}
+              className={`text-sm uppercase tracking-wider font-medium transition-colors py-1 whitespace-nowrap relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[var(--primary)] after:transition-all ${
+                isActive
+                  ? 'text-[var(--primary)] font-bold after:w-full drop-shadow-[0_0_8px_rgba(203,240,28,0.4)]'
+                  : 'text-[var(--foreground)]/80 hover:text-[var(--primary)] after:w-0 hover:after:w-full'
+              }`}
+            >
+              {link.name}
+            </a>
+          );
+        })}
       </div>
 
-      {/* Action Buttons Right (Phone number removed) */}
+      {/* Action Buttons Right */}
       <div className="flex items-center gap-3 shrink-0">
         {/* Book a Service chartreuse square button */}
         <button
@@ -82,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
         {/* Mobile / Tablet Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
+          className="xl:hidden p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -91,18 +127,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
       {/* Mobile & Tablet Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-[72px] left-0 w-full bg-[var(--card)] border-b border-[var(--border)] p-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+        <div className="xl:hidden absolute top-[72px] left-0 w-full bg-[var(--card)] border-b border-[var(--border)] p-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg uppercase font-display tracking-wider text-white hover:text-[var(--primary)] border-b border-[var(--border)] pb-2 transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-lg uppercase font-display tracking-wider border-b pb-2 transition-colors ${
+                    isActive
+                      ? 'text-[var(--primary)] font-bold border-[var(--primary)]'
+                      : 'text-white hover:text-[var(--primary)] border-[var(--border)]'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
 
             <div className="pt-2 flex flex-col gap-3">
               <button

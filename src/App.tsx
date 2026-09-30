@@ -13,6 +13,7 @@ import { ClubRides } from './components/ClubRides';
 import { FindUs } from './components/FindUs';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
+import { BackToTop } from './components/BackToTop';
 
 export function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -86,6 +87,9 @@ export function App() {
         onClose={handleCloseBooking}
         initialTierId={selectedBookingTier}
       />
+
+      {/* Floating Back to Top button visible in all sections */}
+      <BackToTop />
     </div>
   );
 }

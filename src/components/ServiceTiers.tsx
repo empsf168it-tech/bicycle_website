@@ -188,11 +188,11 @@ export const ServiceTiers: React.FC<ServiceTiersProps> = ({ onSelectTierForBooki
               <div className="mt-8">
                 <button
                   onClick={() => onSelectTierForBooking(t.id)}
-                  className="w-full py-4 bg-[var(--primary)] text-[var(--primary-foreground)] font-display text-xl font-bold uppercase tracking-wider hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(203,240,28,0.2)]"
+                  className="w-full px-4 py-3.5 sm:py-4 bg-[var(--primary)] text-[var(--primary-foreground)] font-display text-lg sm:text-xl font-bold uppercase tracking-normal sm:tracking-wider hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 sm:gap-3 shadow-[0_0_20px_rgba(203,240,28,0.2)] text-center"
                 >
-                  <Wrench className="w-5 h-5 text-black" />
-                  <span>Book {t.name}</span>
-                  <ArrowRight className="w-5 h-5 text-black" />
+                  <Wrench className="w-5 h-5 text-black shrink-0" />
+                  <span className="truncate sm:overflow-visible">Book {t.name}</span>
+                  <ArrowRight className="w-5 h-5 text-black shrink-0" />
                 </button>
               </div>
 

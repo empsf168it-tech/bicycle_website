@@ -47,7 +47,7 @@ export const ClubRides: React.FC = () => {
         </div>
 
         {/* 3 Pace Groups Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {CLUB_RIDE_DETAILS.groups.map((grp, index) => (
             <div
               key={grp.name}
@@ -76,7 +76,7 @@ export const ClubRides: React.FC = () => {
 
               {index === 2 && (
                 <div className="mt-4 pt-3 border-t border-[var(--border)] flex items-center gap-1.5 text-[10px] font-mono text-[var(--steel)]">
-                  <AlertCircle className="w-3.5 h-3.5 text-[var(--primary)]" />
+                  <AlertCircle className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
                   <span>Unruly drop-ride format. Self-sufficient riders only.</span>
                 </div>
               )}

@@ -24,12 +24,12 @@ export const IndividualRepairs: React.FC<IndividualRepairsProps> = ({ onBookRepa
       <div className="max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-16">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-[var(--border)] pb-6">
-          <div>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 border-b border-[var(--border)] pb-6">
+          <div className="flex-1">
             <div className="eyebrow mb-2">INDIVIDUAL WORKSHOP JOBS · CLEAR PRICING</div>
             <h2 className="font-h2 text-white">COMMON REPAIRS & LABOUR</h2>
           </div>
-          <p className="text-sm sm:text-base text-[var(--muted-foreground)] max-w-md mt-4 md:mt-0">
+          <p className="text-sm sm:text-base text-[var(--muted-foreground)] max-w-md md:max-w-sm lg:max-w-md shrink-0">
             Transparent bench rates. Punctures and adjustments under 15 minutes can be dropped off without an appointment.
           </p>
         </div>
@@ -54,7 +54,7 @@ export const IndividualRepairs: React.FC<IndividualRepairsProps> = ({ onBookRepa
           </div>
 
           {/* Search box */}
-          <div className="relative min-w-[240px]">
+          <div className="relative w-full sm:w-auto sm:min-w-[240px]">
             <Search className="w-4 h-4 text-[var(--muted-foreground)] absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
@@ -66,8 +66,8 @@ export const IndividualRepairs: React.FC<IndividualRepairsProps> = ({ onBookRepa
           </div>
         </div>
 
-        {/* Repairs List: 2-column layout on mobile and desktop, hover shifts price 4px left */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+        {/* Repairs List: 2-column layout on mobile, tab and desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 items-stretch">
           {filteredRepairs.map((job: IndividualRepair, index: number) => (
             <motion.div
               key={job.id}
@@ -78,39 +78,41 @@ export const IndividualRepairs: React.FC<IndividualRepairsProps> = ({ onBookRepa
                 delay: Math.min(index * 0.03, 0.3),
                 ease: 'linear',
               }}
-              className="group flex items-center justify-between py-3.5 px-4 bg-[var(--background)] hover:bg-[var(--card-elevated)] border-b border-[var(--border)] transition-colors duration-150 cursor-pointer"
+              className="group h-full min-h-[72px] flex items-center justify-between p-3.5 sm:p-4 bg-[var(--background)] hover:bg-[var(--card-elevated)] border border-[var(--border)] hover:border-[var(--steel)] transition-all duration-150 cursor-pointer"
               onClick={onBookRepair}
             >
-              <div className="flex items-center gap-3 pr-4">
+              <div className="flex items-center gap-3 pr-3 flex-1 min-w-0">
                 <div className="w-2 h-2 bg-[var(--border)] group-hover:bg-[var(--primary)] transition-colors shrink-0" />
-                <div>
-                  <p className="text-sm font-medium text-white group-hover:text-[var(--primary)] transition-colors flex items-center gap-2">
-                    <span>{job.name}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <span className="text-sm font-medium text-white group-hover:text-[var(--primary)] transition-colors">
+                      {job.name}
+                    </span>
                     {job.walkinEligible && (
-                      <span className="inline-flex items-center gap-0.5 text-[9px] font-mono uppercase px-1.5 py-0.2 bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/40">
+                      <span className="inline-flex items-center gap-0.5 text-[9px] font-mono uppercase px-1.5 py-0.5 bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/40 shrink-0">
                         <Zap className="w-2.5 h-2.5" /> Walk-in
                       </span>
                     )}
-                  </p>
-                  <p className="text-[11px] text-[var(--muted-foreground)] font-mono">
+                  </div>
+                  <p className="text-[11px] text-[var(--muted-foreground)] font-mono mt-0.5">
                     {job.turnaroundNote}
                   </p>
                 </div>
               </div>
 
-              {/* Price: shifts 4px left on hover */}
-              <div className="flex items-center gap-2 shrink-0">
-                <div className="text-right transition-transform duration-150 group-hover:-translate-x-1">
-                  <span className="price-num text-xl font-bold text-white group-hover:text-[var(--primary)]">
+              {/* Price: aligned amount column with unit underneath */}
+              <div className="flex items-center gap-1.5 shrink-0 ml-3 min-w-[65px] sm:min-w-[75px] justify-end">
+                <div className="text-right flex flex-col items-end justify-center transition-transform duration-150 group-hover:-translate-x-1">
+                  <span className="price-num text-xl font-bold text-white group-hover:text-[var(--primary)] leading-tight">
                     £{job.price}
                   </span>
                   {job.unit && (
-                    <span className="text-[11px] font-mono text-[var(--muted-foreground)] ml-1">
+                    <span className="text-[10px] font-mono text-[var(--muted-foreground)] leading-none -mt-0.5 whitespace-nowrap">
                       {job.unit}
                     </span>
                   )}
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-[var(--primary)] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-150" />
+                <ArrowRight className="w-3.5 h-3.5 text-[var(--primary)] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-150 shrink-0" />
               </div>
             </motion.div>
           ))}

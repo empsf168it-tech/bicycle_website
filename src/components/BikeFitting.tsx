@@ -23,13 +23,13 @@ export const BikeFitting: React.FC<BikeFittingProps> = ({ onBookFit }) => {
         </div>
 
         {/* 2 Fit Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {BIKE_FITTING_LEVELS.map((fit: FitLevel) => (
             <div
               key={fit.id}
-              className="bg-[var(--card)] border border-[var(--border)] hover:border-[var(--steel)] p-8 flex flex-col justify-between transition-all group"
+              className="bg-[var(--card)] border border-[var(--border)] hover:border-[var(--steel)] p-6 sm:p-8 flex flex-col justify-between transition-all group h-full"
             >
-              <div>
+              <div className="flex-1 flex flex-col">
                 {/* Top header */}
                 <div className="flex items-start justify-between mb-4 border-b border-[var(--border)] pb-4">
                   <div>
@@ -45,18 +45,20 @@ export const BikeFitting: React.FC<BikeFittingProps> = ({ onBookFit }) => {
                   </div>
                 </div>
 
-                <p className="text-sm text-[var(--foreground)]/90 font-light mb-6">
+                <p className="text-sm text-[var(--foreground)]/90 font-light mb-6 md:min-h-[72px]">
                   {fit.description}
                 </p>
 
                 {/* Best for */}
-                <div className="p-3 bg-[var(--card-elevated)] border border-[var(--border)] mb-6 text-xs text-[var(--muted-foreground)] font-mono">
-                  <span className="text-[var(--primary)] font-bold uppercase">Best For: </span>
-                  {fit.bestFor}
+                <div className="p-3 bg-[var(--card-elevated)] border border-[var(--border)] mb-6 text-xs text-[var(--muted-foreground)] font-mono md:min-h-[64px] flex items-center">
+                  <div>
+                    <span className="text-[var(--primary)] font-bold uppercase">Best For: </span>
+                    {fit.bestFor}
+                  </div>
                 </div>
 
                 {/* Feature Checklist */}
-                <div className="space-y-3 mb-8">
+                <div className="space-y-3 mb-8 flex-1">
                   <span className="text-xs font-mono uppercase tracking-widest text-[var(--muted-foreground)] block">
                     What is measured & adjusted:
                   </span>
@@ -72,14 +74,14 @@ export const BikeFitting: React.FC<BikeFittingProps> = ({ onBookFit }) => {
               </div>
 
               {/* Action Button */}
-              <div>
+              <div className="mt-auto pt-2">
                 <button
                   onClick={() => onBookFit?.(fit.name)}
-                  className="w-full py-3.5 bg-[var(--card-elevated)] group-hover:bg-[var(--primary)] text-white group-hover:text-black border border-[var(--border)] group-hover:border-[var(--primary)] font-display text-lg font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+                  className="w-full min-h-[52px] sm:min-h-[56px] px-4 py-3.5 bg-[var(--card-elevated)] group-hover:bg-[var(--primary)] text-white group-hover:text-black border border-[var(--border)] group-hover:border-[var(--primary)] font-display text-base sm:text-lg font-bold uppercase tracking-normal sm:tracking-wider transition-all flex items-center justify-center gap-2 text-center"
                 >
-                  <Clock className="w-4 h-4" />
-                  <span>Book {fit.name} ({fit.duration})</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <Clock className="w-4 h-4 shrink-0" />
+                  <span className="truncate sm:overflow-visible">Book {fit.name} ({fit.duration})</span>
+                  <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
               </div>
 

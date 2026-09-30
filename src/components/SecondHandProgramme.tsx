@@ -76,7 +76,7 @@ export const SecondHandProgramme: React.FC = () => {
         {/* Warranty & Transparency Guarantee Banner */}
         <div className="bg-[var(--background)] border-2 border-[var(--primary)] p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
           
-          <div className="flex items-start gap-4">
+          <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-[var(--primary)]/10 border border-[var(--primary)] flex items-center justify-center shrink-0">
               <ShieldCheck className="w-6 h-6 text-[var(--primary)]" />
             </div>
@@ -90,7 +90,7 @@ export const SecondHandProgramme: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
+          <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-[var(--primary)]/10 border border-[var(--primary)] flex items-center justify-center shrink-0">
               <RefreshCw className="w-6 h-6 text-[var(--primary)]" />
             </div>
@@ -104,7 +104,7 @@ export const SecondHandProgramme: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
+          <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-[var(--primary)]/10 border border-[var(--primary)] flex items-center justify-center shrink-0">
               <FileText className="w-6 h-6 text-[var(--primary)]" />
             </div>

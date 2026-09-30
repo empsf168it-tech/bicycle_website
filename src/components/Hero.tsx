@@ -91,11 +91,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.45 }}
-            className="flex flex-wrap items-center gap-4 mb-12"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12"
           >
             <button
               onClick={onOpenBooking}
-              className="px-8 py-4 bg-[var(--primary)] text-[var(--primary-foreground)] font-display text-xl font-bold uppercase tracking-wider hover:brightness-110 active:scale-[0.98] transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(203,240,28,0.25)]"
+              className="w-full sm:w-auto px-8 py-4 bg-[var(--primary)] text-[var(--primary-foreground)] border border-transparent font-display text-xl font-bold uppercase tracking-wider hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(203,240,28,0.25)] text-center"
             >
               <Wrench className="w-5 h-5 text-black" />
               <span>Book a Service</span>
@@ -103,10 +103,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
             <a
               href="#repairs"
-              className="px-7 py-4 bg-[var(--card)] hover:bg-[var(--card-elevated)] text-white border border-[var(--border)] hover:border-[var(--steel)] font-display text-xl font-bold uppercase tracking-wider transition-all flex items-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-[var(--card)] hover:bg-[var(--card-elevated)] text-white border border-[var(--border)] hover:border-[var(--steel)] font-display text-xl font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-center"
             >
               <span>See Repair Prices</span>
-              <ArrowRight className="w-4 h-4 text-[var(--primary)]" />
+              <ArrowRight className="w-5 h-5 text-[var(--primary)]" />
             </a>
           </motion.div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Phone, MapPin, Wrench, ArrowUp } from 'lucide-react';
+import { ShieldCheck, Phone, MapPin, Wrench } from 'lucide-react';
 import { SHOP_LOCATION } from '../data/workshopData';
 
 interface FooterProps {
@@ -7,10 +7,6 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <footer className="bg-[#111316] text-[var(--foreground)] border-t-2 border-[var(--primary)] pt-16 pb-24 md:pb-16 relative">
       <div className="max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-16">
@@ -127,16 +123,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         </div>
 
         {/* Bottom Line Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[var(--muted-foreground)]">
+        <div className="pt-8 flex items-center justify-between gap-4 text-xs font-mono text-[var(--muted-foreground)]">
           <p>© 2026 VELO & TORQUE · Registered in England · Cytech Accredited</p>
-
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
-          >
-            <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
         </div>
 
       </div>
